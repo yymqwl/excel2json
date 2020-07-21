@@ -43,7 +43,20 @@ namespace excel2json
                 Formatting = Formatting.Indented
             };
 
-            if (!forceSheetName && validSheets.Count == 1)
+            // mutiple sheet
+            //Dictionary<string, object> data = new Dictionary<string, object>();
+            List<object> Tmp_Ls = new List<object>();
+            foreach (var sheet in validSheets)
+            {
+                List<object> sheetValue = (List<object>)convertSheet(sheet, exportArray, lowcase);
+                Tmp_Ls.AddRange(sheetValue);
+                //data.Add(sheet.TableName, sheetValue);
+            }
+
+            //-- convert to json string
+            mContext = JsonConvert.SerializeObject(Tmp_Ls, jsonSettings);
+            /*
+            if (!forceSheetName || validSheets.Count == 1)
             {   // single sheet
 
                 //-- convert to object
@@ -64,7 +77,7 @@ namespace excel2json
 
                 //-- convert to json string
                 mContext = JsonConvert.SerializeObject(data, jsonSettings);
-            }
+            }*/
         }
 
         private object convertSheet(DataTable sheet, bool exportArray, bool lowcase)
