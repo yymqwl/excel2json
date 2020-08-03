@@ -50,7 +50,6 @@ namespace excel2json
             {
                 List<object> sheetValue = (List<object>)convertSheet(sheet, exportArray, lowcase);
                 Tmp_Ls.AddRange(sheetValue);
-                //data.Add(sheet.TableName, sheetValue);
             }
 
             //-- convert to json string

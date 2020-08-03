@@ -18,6 +18,8 @@ namespace excel2json.GUI
         private JsonExporter mJson;
         private CSDefineGenerator mCSharp;
 
+        private TsDefineGenerator mTypescript;
+
         /// <summary>
         /// 导出的Json文本
         /// </summary>
@@ -34,6 +36,16 @@ namespace excel2json.GUI
             get {
                 if (mCSharp != null)
                     return mCSharp.code;
+                else
+                    return "";
+            }
+        }
+        public string TypeScriptCode
+        {
+            get
+            {
+                if (mTypescript != null)
+                    return mTypescript.Code;
                 else
                     return "";
             }
@@ -94,6 +106,8 @@ namespace excel2json.GUI
 
             //-- C# 结构体定义
             mCSharp = new CSDefineGenerator(excelPath, excel);
+
+            mTypescript = new TsDefineGenerator(excelPath,excel);
 
             //-- 导出JSON
             mJson = new JsonExporter(excel, options.Lowcase, options.ExportArray, options.DateFormat, options.ForceSheetName, header);
