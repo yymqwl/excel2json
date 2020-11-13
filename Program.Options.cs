@@ -73,6 +73,18 @@ namespace excel2json
                 get;
                 set;
             }
+
+            [Option('x', "exclude_prefix", Required = false, DefaultValue = "", HelpText = "exclude sheet or column start with specified prefix.")]
+            public string ExcludePrefix {
+                get;
+                set;
+            }
+
+            [Option('l', "cell_json", Required = false, DefaultValue = false, HelpText = "convert json string in cell")]
+            public bool CellJson {
+                get;
+                set;
+            }
         }
     }
 }

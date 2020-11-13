@@ -29,6 +29,7 @@
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label5;
             System.Windows.Forms.Label label6;
+            System.Windows.Forms.Label label7;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -48,6 +49,7 @@
             this.pictureBoxExcel = new System.Windows.Forms.PictureBox();
             this.labelExcelFile = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBoxExculdePrefix = new System.Windows.Forms.TextBox();
             this.comboBoxSheetName = new System.Windows.Forms.ComboBox();
             this.comboBoxDateFormat = new System.Windows.Forms.ComboBox();
             this.btnReimport = new System.Windows.Forms.Button();
@@ -58,14 +60,15 @@
             this.tabControlCode = new System.Windows.Forms.TabControl();
             this.tabPageJSON = new System.Windows.Forms.TabPage();
             this.tabCSharp = new System.Windows.Forms.TabPage();
-            this.tabTypescript = new System.Windows.Forms.TabPage();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.checkBoxCellJson = new System.Windows.Forms.CheckBox();
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
             this.statusStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -84,7 +87,7 @@
             // 
             label2.Location = new System.Drawing.Point(6, 49);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(77, 12);
+            label2.Size = new System.Drawing.Size(102, 12);
             label2.TabIndex = 1;
             label2.Text = "Encoding:";
             label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -92,7 +95,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(6, 23);
+            label1.Location = new System.Drawing.Point(31, 23);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(77, 12);
             label1.TabIndex = 1;
@@ -103,7 +106,7 @@
             // 
             label4.Location = new System.Drawing.Point(6, 75);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(77, 12);
+            label4.Size = new System.Drawing.Size(102, 12);
             label4.TabIndex = 6;
             label4.Text = "Lowcase:";
             label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -112,7 +115,7 @@
             // 
             label3.Location = new System.Drawing.Point(6, 101);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(77, 12);
+            label3.Size = new System.Drawing.Size(102, 12);
             label3.TabIndex = 4;
             label3.Text = "Header:";
             label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -121,7 +124,7 @@
             // 
             label5.Location = new System.Drawing.Point(6, 127);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(77, 12);
+            label5.Size = new System.Drawing.Size(102, 12);
             label5.TabIndex = 9;
             label5.Text = "Date Format:";
             label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -130,10 +133,19 @@
             // 
             label6.Location = new System.Drawing.Point(6, 153);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(77, 12);
+            label6.Size = new System.Drawing.Size(102, 12);
             label6.TabIndex = 11;
             label6.Text = "SheetName:";
             label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label7
+            // 
+            label7.Location = new System.Drawing.Point(6, 179);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(102, 12);
+            label7.TabIndex = 13;
+            label7.Text = "ExculdePrefix:";
+            label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // statusStrip
             // 
@@ -150,7 +162,7 @@
             this.statusLabel.IsLink = true;
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.statusLabel.Size = new System.Drawing.Size(139, 17);
+            this.statusLabel.Size = new System.Drawing.Size(130, 17);
             this.statusLabel.Text = "https://neil3d.github.io";
             this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.statusLabel.Click += new System.EventHandler(this.statusLabel_Click);
@@ -170,7 +182,7 @@
             this.btnHelp});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(784, 48);
+            this.toolStrip.Size = new System.Drawing.Size(784, 46);
             this.toolStrip.TabIndex = 4;
             this.toolStrip.Text = "Import excel file and export as JSON";
             // 
@@ -179,7 +191,7 @@
             this.btnImportExcel.Image = global::excel2json.Properties.Resources.excel;
             this.btnImportExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnImportExcel.Name = "btnImportExcel";
-            this.btnImportExcel.Size = new System.Drawing.Size(85, 45);
+            this.btnImportExcel.Size = new System.Drawing.Size(77, 43);
             this.btnImportExcel.Text = "Import Excel";
             this.btnImportExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnImportExcel.ToolTipText = "Import Excel .xlsx file";
@@ -188,14 +200,14 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 48);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 46);
             // 
             // btnCopyJSON
             // 
             this.btnCopyJSON.Image = global::excel2json.Properties.Resources.clipboard;
             this.btnCopyJSON.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCopyJSON.Name = "btnCopyJSON";
-            this.btnCopyJSON.Size = new System.Drawing.Size(78, 45);
+            this.btnCopyJSON.Size = new System.Drawing.Size(70, 43);
             this.btnCopyJSON.Text = "Copy JSON";
             this.btnCopyJSON.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCopyJSON.ToolTipText = "Copy JSON string to clipboard";
@@ -206,7 +218,7 @@
             this.btnSaveJson.Image = global::excel2json.Properties.Resources.json;
             this.btnSaveJson.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSaveJson.Name = "btnSaveJson";
-            this.btnSaveJson.Size = new System.Drawing.Size(75, 45);
+            this.btnSaveJson.Size = new System.Drawing.Size(66, 43);
             this.btnSaveJson.Text = "Save JSON";
             this.btnSaveJson.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSaveJson.ToolTipText = "Save JSON file";
@@ -217,7 +229,7 @@
             this.btnCopyCSharp.Image = global::excel2json.Properties.Resources.clipboard;
             this.btnCopyCSharp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCopyCSharp.Name = "btnCopyCSharp";
-            this.btnCopyCSharp.Size = new System.Drawing.Size(62, 45);
+            this.btnCopyCSharp.Size = new System.Drawing.Size(57, 43);
             this.btnCopyCSharp.Text = "Copy C#";
             this.btnCopyCSharp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCopyCSharp.ToolTipText = "Save JSON file";
@@ -228,7 +240,7 @@
             this.btnSaveCSharp.Image = global::excel2json.Properties.Resources.code;
             this.btnSaveCSharp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSaveCSharp.Name = "btnSaveCSharp";
-            this.btnSaveCSharp.Size = new System.Drawing.Size(59, 45);
+            this.btnSaveCSharp.Size = new System.Drawing.Size(53, 43);
             this.btnSaveCSharp.Text = "Save C#";
             this.btnSaveCSharp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSaveCSharp.ToolTipText = "Save JSON file";
@@ -237,14 +249,14 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 48);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
             // 
             // btnHelp
             // 
             this.btnHelp.Image = global::excel2json.Properties.Resources.about;
             this.btnHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(39, 45);
+            this.btnHelp.Size = new System.Drawing.Size(36, 43);
             this.btnHelp.Text = "Help";
             this.btnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnHelp.ToolTipText = "Help Document on web";
@@ -255,7 +267,7 @@
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 48);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 46);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -265,8 +277,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControlCode);
-            this.splitContainer1.Size = new System.Drawing.Size(784, 492);
-            this.splitContainer1.SplitterDistance = 261;
+            this.splitContainer1.Size = new System.Drawing.Size(784, 494);
+            this.splitContainer1.SplitterDistance = 288;
             this.splitContainer1.TabIndex = 5;
             // 
             // flowLayoutPanel1
@@ -277,7 +289,7 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(259, 490);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(286, 492);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // panelExcelDropBox
@@ -289,7 +301,7 @@
             this.panelExcelDropBox.Location = new System.Drawing.Point(8, 8);
             this.panelExcelDropBox.Margin = new System.Windows.Forms.Padding(8);
             this.panelExcelDropBox.Name = "panelExcelDropBox";
-            this.panelExcelDropBox.Size = new System.Drawing.Size(245, 212);
+            this.panelExcelDropBox.Size = new System.Drawing.Size(270, 176);
             this.panelExcelDropBox.TabIndex = 1;
             this.panelExcelDropBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.panelExcelDropBox_DragDrop);
             this.panelExcelDropBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.panelExcelDropBox_DragEnter);
@@ -302,7 +314,7 @@
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(243, 210);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(268, 174);
             this.flowLayoutPanel2.TabIndex = 0;
             // 
             // pictureBoxExcel
@@ -310,25 +322,27 @@
             this.pictureBoxExcel.Image = global::excel2json.Properties.Resources.excel_64;
             this.pictureBoxExcel.Location = new System.Drawing.Point(3, 3);
             this.pictureBoxExcel.Name = "pictureBoxExcel";
-            this.pictureBoxExcel.Size = new System.Drawing.Size(237, 100);
+            this.pictureBoxExcel.Size = new System.Drawing.Size(262, 130);
             this.pictureBoxExcel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBoxExcel.TabIndex = 0;
             this.pictureBoxExcel.TabStop = false;
             // 
             // labelExcelFile
             // 
-            this.labelExcelFile.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelExcelFile.Location = new System.Drawing.Point(3, 106);
+            this.labelExcelFile.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelExcelFile.Location = new System.Drawing.Point(3, 136);
             this.labelExcelFile.Name = "labelExcelFile";
             this.labelExcelFile.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelExcelFile.Size = new System.Drawing.Size(237, 70);
+            this.labelExcelFile.Size = new System.Drawing.Size(260, 35);
             this.labelExcelFile.TabIndex = 1;
             this.labelExcelFile.Text = "Drop you .xlsx file here!";
             this.labelExcelFile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox1
             // 
-            this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.checkBoxCellJson);
+            this.groupBox1.Controls.Add(this.textBoxExculdePrefix);
+            this.groupBox1.Controls.Add(label7);
             this.groupBox1.Controls.Add(label6);
             this.groupBox1.Controls.Add(this.comboBoxSheetName);
             this.groupBox1.Controls.Add(label5);
@@ -343,13 +357,20 @@
             this.groupBox1.Controls.Add(this.comboBoxEncoding);
             this.groupBox1.Controls.Add(this.comboBoxType);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(8, 236);
+            this.groupBox1.Location = new System.Drawing.Point(8, 200);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(245, 238);
+            this.groupBox1.Size = new System.Drawing.Size(270, 280);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
+            // 
+            // textBoxExculdePrefix
+            // 
+            this.textBoxExculdePrefix.Location = new System.Drawing.Point(114, 180);
+            this.textBoxExculdePrefix.Name = "textBoxExculdePrefix";
+            this.textBoxExculdePrefix.Size = new System.Drawing.Size(150, 21);
+            this.textBoxExculdePrefix.TabIndex = 14;
             // 
             // comboBoxSheetName
             // 
@@ -359,7 +380,7 @@
             this.comboBoxSheetName.Items.AddRange(new object[] {
             "Yes",
             "No"});
-            this.comboBoxSheetName.Location = new System.Drawing.Point(89, 150);
+            this.comboBoxSheetName.Location = new System.Drawing.Point(114, 153);
             this.comboBoxSheetName.Name = "comboBoxSheetName";
             this.comboBoxSheetName.Size = new System.Drawing.Size(150, 20);
             this.comboBoxSheetName.TabIndex = 10;
@@ -372,7 +393,7 @@
             this.comboBoxDateFormat.Items.AddRange(new object[] {
             "yyyy/MM/dd",
             "yyyy/MM/dd hh:mm:ss"});
-            this.comboBoxDateFormat.Location = new System.Drawing.Point(89, 124);
+            this.comboBoxDateFormat.Location = new System.Drawing.Point(114, 127);
             this.comboBoxDateFormat.Name = "comboBoxDateFormat";
             this.comboBoxDateFormat.Size = new System.Drawing.Size(150, 20);
             this.comboBoxDateFormat.TabIndex = 8;
@@ -380,7 +401,7 @@
             // 
             // btnReimport
             // 
-            this.btnReimport.Location = new System.Drawing.Point(68, 195);
+            this.btnReimport.Location = new System.Drawing.Point(85, 238);
             this.btnReimport.Name = "btnReimport";
             this.btnReimport.Size = new System.Drawing.Size(75, 23);
             this.btnReimport.TabIndex = 7;
@@ -396,7 +417,7 @@
             this.comboBoxLowcase.Items.AddRange(new object[] {
             "Yes",
             "No"});
-            this.comboBoxLowcase.Location = new System.Drawing.Point(89, 72);
+            this.comboBoxLowcase.Location = new System.Drawing.Point(114, 75);
             this.comboBoxLowcase.Name = "comboBoxLowcase";
             this.comboBoxLowcase.Size = new System.Drawing.Size(150, 20);
             this.comboBoxLowcase.TabIndex = 5;
@@ -412,7 +433,7 @@
             "4",
             "5",
             "6"});
-            this.comboBoxHeader.Location = new System.Drawing.Point(89, 98);
+            this.comboBoxHeader.Location = new System.Drawing.Point(114, 101);
             this.comboBoxHeader.Name = "comboBoxHeader";
             this.comboBoxHeader.Size = new System.Drawing.Size(150, 20);
             this.comboBoxHeader.TabIndex = 3;
@@ -423,7 +444,7 @@
             this.comboBoxEncoding.DisplayMember = "0";
             this.comboBoxEncoding.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEncoding.FormattingEnabled = true;
-            this.comboBoxEncoding.Location = new System.Drawing.Point(89, 46);
+            this.comboBoxEncoding.Location = new System.Drawing.Point(114, 49);
             this.comboBoxEncoding.Name = "comboBoxEncoding";
             this.comboBoxEncoding.Size = new System.Drawing.Size(150, 20);
             this.comboBoxEncoding.TabIndex = 0;
@@ -437,7 +458,7 @@
             this.comboBoxType.Items.AddRange(new object[] {
             "Array",
             "Dict Object"});
-            this.comboBoxType.Location = new System.Drawing.Point(89, 20);
+            this.comboBoxType.Location = new System.Drawing.Point(114, 23);
             this.comboBoxType.Name = "comboBoxType";
             this.comboBoxType.Size = new System.Drawing.Size(150, 20);
             this.comboBoxType.TabIndex = 0;
@@ -447,12 +468,11 @@
             // 
             this.tabControlCode.Controls.Add(this.tabPageJSON);
             this.tabControlCode.Controls.Add(this.tabCSharp);
-            this.tabControlCode.Controls.Add(this.tabTypescript);
             this.tabControlCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlCode.Location = new System.Drawing.Point(0, 0);
             this.tabControlCode.Name = "tabControlCode";
             this.tabControlCode.SelectedIndex = 0;
-            this.tabControlCode.Size = new System.Drawing.Size(517, 490);
+            this.tabControlCode.Size = new System.Drawing.Size(490, 492);
             this.tabControlCode.TabIndex = 0;
             // 
             // tabPageJSON
@@ -460,7 +480,7 @@
             this.tabPageJSON.Location = new System.Drawing.Point(4, 22);
             this.tabPageJSON.Name = "tabPageJSON";
             this.tabPageJSON.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageJSON.Size = new System.Drawing.Size(509, 464);
+            this.tabPageJSON.Size = new System.Drawing.Size(482, 466);
             this.tabPageJSON.TabIndex = 0;
             this.tabPageJSON.Text = "JSON";
             this.tabPageJSON.UseVisualStyleBackColor = true;
@@ -470,25 +490,25 @@
             this.tabCSharp.Location = new System.Drawing.Point(4, 22);
             this.tabCSharp.Name = "tabCSharp";
             this.tabCSharp.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCSharp.Size = new System.Drawing.Size(509, 464);
+            this.tabCSharp.Size = new System.Drawing.Size(482, 466);
             this.tabCSharp.TabIndex = 1;
             this.tabCSharp.Text = "C#";
             this.tabCSharp.UseVisualStyleBackColor = true;
-            // 
-            // tabTypescript
-            // 
-            this.tabTypescript.Location = new System.Drawing.Point(4, 22);
-            this.tabTypescript.Name = "tabTypescript";
-            this.tabTypescript.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTypescript.Size = new System.Drawing.Size(509, 464);
-            this.tabTypescript.TabIndex = 2;
-            this.tabTypescript.Text = "TypeScript";
-            this.tabTypescript.UseVisualStyleBackColor = true;
             // 
             // backgroundWorker
             // 
             this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
             this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            // 
+            // checkBoxCellJson
+            // 
+            this.checkBoxCellJson.AutoSize = true;
+            this.checkBoxCellJson.Location = new System.Drawing.Point(54, 207);
+            this.checkBoxCellJson.Name = "checkBoxCellJson";
+            this.checkBoxCellJson.Size = new System.Drawing.Size(186, 16);
+            this.checkBoxCellJson.TabIndex = 15;
+            this.checkBoxCellJson.Text = "Convert Json String in Cell";
+            this.checkBoxCellJson.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -512,7 +532,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.panelExcelDropBox.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExcel)).EndInit();
@@ -547,13 +566,14 @@
         private System.Windows.Forms.ToolStripButton btnSaveJson;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Button btnReimport;
-        private System.Windows.Forms.ComboBox comboBoxDateFormat;
-        private System.Windows.Forms.ComboBox comboBoxSheetName;
-        private System.Windows.Forms.ToolStripButton btnCopyCSharp;
-        private System.Windows.Forms.ToolStripButton btnSaveCSharp;
         private System.Windows.Forms.TabControl tabControlCode;
         private System.Windows.Forms.TabPage tabPageJSON;
+        private System.Windows.Forms.ComboBox comboBoxDateFormat;
+        private System.Windows.Forms.ComboBox comboBoxSheetName;
         private System.Windows.Forms.TabPage tabCSharp;
-        private System.Windows.Forms.TabPage tabTypescript;
+        private System.Windows.Forms.ToolStripButton btnCopyCSharp;
+        private System.Windows.Forms.ToolStripButton btnSaveCSharp;
+        private System.Windows.Forms.TextBox textBoxExculdePrefix;
+        private System.Windows.Forms.CheckBox checkBoxCellJson;
     }
 }
